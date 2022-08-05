@@ -17,7 +17,7 @@ export default function MobileMenu({ mobMenuOpen, setMobMenuOpen }) {
   const modalContent = (
     <>
       <div
-        className={`fixed top-[90px] z-30 h-fit w-full select-none rounded-b-lg bg-lightgray px-6 pb-[35px] pt-[84px] md:hidden ${
+        className={`absolute top-[90px] z-30 h-fit w-full select-none rounded-b-lg bg-lightgray px-6 pb-[35px] pt-[84px] md:hidden ${
           mobMenuOpen ? "translate-y-0" : "-translate-y-full"
         } duration-300 ease-in-out`}
       >

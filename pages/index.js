@@ -9,17 +9,31 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main>
+      <main className='text-center'>
         <h1>hello world</h1>
         <h2>hello world</h2>
         <h3>hello world</h3>
         <h4>hello world</h4>
         <h5>hello world</h5>
         <h6>hello world</h6>
-
-        <p className='form-title'>HELLO WORLD</p>
-        <p className='sub-title'>HELLO WORLD</p>
-        <p>HELLO WORLD</p>
+        <h1>hello world</h1>
+        <h2>hello world</h2>
+        <h3>hello world</h3>
+        <h4>hello world</h4>
+        <h5>hello world</h5>
+        <h6>hello world</h6>
+        <h1>hello world</h1>
+        <h2>hello world</h2>
+        <h3>hello world</h3>
+        <h4>hello world</h4>
+        <h5>hello world</h5>
+        <h6>hello world</h6>
+        <h1>hello world</h1>
+        <h2>hello world</h2>
+        <h3>hello world</h3>
+        <h4>hello world</h4>
+        <h5>hello world</h5>
+        <h6>hello world</h6>
       </main>
     </div>
   );
