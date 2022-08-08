@@ -1,10 +1,20 @@
 import "../styles/globals.css";
 import Header from "../components/UI/Header";
-import { useState } from "react";
-import MobileMenu from "../components/UI/MobileMenu";
+import { useState, useEffect } from "react";
+import MobileMenu from "../components/MobileMenu";
 
 function MyApp({ Component, pageProps }) {
   const [mobMenuOpen, setMobMenuOpen] = useState(false);
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth >= 1024) {
+        setMobMenuOpen(false);
+      }
+    }
+
+    window.addEventListener("resize", handleResize);
+  });
 
   return (
     <>
