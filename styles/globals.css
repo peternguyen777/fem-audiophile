@@ -13,27 +13,27 @@
   }
 
   h1 {
-    @apply font-manrope text-[56px] font-bold uppercase leading-[58px] tracking-[2px];
+    @apply font-manrope text-[56px] font-bold leading-[58px] tracking-[2px];
   }
 
   h2 {
-    @apply font-manrope text-[40px] font-bold uppercase leading-[44px] tracking-[1.5px];
+    @apply font-manrope text-[40px] font-bold leading-[44px] tracking-[1.5px];
   }
 
   h3 {
-    @apply font-manrope text-[32px] font-bold uppercase leading-[36px] tracking-[1.15px];
+    @apply font-manrope text-[32px] font-bold leading-[36px] tracking-[1.15px];
   }
 
   h4 {
-    @apply font-manrope text-[28px] font-bold uppercase leading-[38px] tracking-[2px];
+    @apply font-manrope text-[28px] font-bold leading-[38px] tracking-[2px];
   }
 
   h5 {
-    @apply font-manrope text-[24px] font-bold uppercase leading-[33px] tracking-[1.7px];
+    @apply font-manrope text-[24px] font-bold leading-[33px] tracking-[1.7px];
   }
 
   h6 {
-    @apply font-manrope text-[18px] font-bold uppercase leading-[24px] tracking-[1.3px];
+    @apply font-manrope text-[18px] font-bold leading-[24px] tracking-[1.3px];
   }
 
   p {

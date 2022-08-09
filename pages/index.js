@@ -1,6 +1,11 @@
 import Head from "next/head";
 import Banner from "../components/Home/Banner";
 import HomeMenu from "../components/HomeMenu";
+import Zx9 from "../components/Home/Zx9";
+import Zx7 from "../components/Home/Zx7";
+import Yx1 from "../components/Home/Yx1";
+import Action from "../components/Action";
+import Footer from "../components/Footer";
 
 export default function Home() {
   return (
@@ -16,22 +21,13 @@ export default function Home() {
         <div className='mt-[92px] md:mt-[148px] lg:mt-[200px]'>
           <HomeMenu />
         </div>
-
-        {/* <div className='relative mt-[96px] h-[720px] rounded-lg bg-orange'>
-          <svg
-            width='944'
-            height='944'
-            xmlns='http://www.w3.org/2000/svg'
-            className='mx-auto max-h-[944px] max-w-[944px]'
-          >
-            <g stroke='#FFF' fill='none' fillRule='evenodd' opacity='.202'>
-              <circle cx='472' cy='472' r='235.5' />
-              <circle cx='472' cy='472' r='270.5' />
-              <circle cx='472' cy='472' r='471.5' />
-            </g>
-          </svg>
-        </div> */}
+        <Zx9 />
+        <Zx7 />
+        <Yx1 />
+        <Action />
       </main>
+
+      <Footer />
     </div>
   );
 }

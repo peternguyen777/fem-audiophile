@@ -13,7 +13,7 @@ export default function MobileMenu({ mobMenuOpen, setMobMenuOpen }) {
   const modalContent = (
     <div
       className={`mobMenuScroll fixed top-[90px] z-30 h-[calc(100vh-90px)] max-h-[750px] w-full select-none overflow-y-scroll rounded-b-lg bg-lightgray px-6 pb-[35px] pt-[84px] duration-300 ease-in-out md:max-h-[340px] md:px-10 md:pt-[108px] md:pb-[67px] ${
-        mobMenuOpen ? "translate-y-0" : "-translate-y-full"
+        mobMenuOpen ? "translate-y-0" : "-translate-y-[calc(100%+1px)]"
       }`}
     >
       <HomeMenu />
