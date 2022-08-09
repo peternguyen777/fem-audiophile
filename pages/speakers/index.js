@@ -23,7 +23,7 @@ function SpeakersHome() {
       <main className='w-full max-w-[1190px] px-6 md:px-10 lg:mx-auto'>
         <div className='mt-16 space-y-[120px] md:mt-[120px] lg:mt-[160px]'>
           {headphones.map((item) => (
-            <CardProduct item={item} />
+            <CardProduct item={item} key={item.id} />
           ))}
         </div>
         <div className='mt-[172px] lg:mt-[240px]'>
