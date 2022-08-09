@@ -53,8 +53,8 @@ function DetailProduct({ projectData }) {
       <div>
         <h3>IN THE BOX</h3>
         <ul>
-          {projectData.includes.map((boxItem) => (
-            <li>
+          {projectData.includes.map((boxItem, i) => (
+            <li key={i}>
               <span>{boxItem.quantity}x</span> {boxItem.item}
             </li>
           ))}
