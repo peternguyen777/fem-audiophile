@@ -35,10 +35,10 @@ function Footer() {
           </div>
         </div>
         <p className='mt-12 text-center text-white opacity-50 md:mt-8 md:text-left lg:mt-9 lg:w-[540px]'>
-          Audiophile is an all in one stop to fulfill your audio needs. We're a
-          small team of music lovers and sound specialists who are devoted to
-          helping you get the most out of personal audio. Come and visit our
-          demo facility - we're open 7 days a week.
+          Audiophile is an all in one stop to fulfill your audio needs.
+          We&apos;re a small team of music lovers and sound specialists who are
+          devoted to helping you get the most out of personal audio. Come and
+          visit our demo facility - we&apos;re open 7 days a week.
         </p>
         <div className='flex flex-col items-center md:mt-20 md:flex-row md:justify-between lg:mt-14'>
           <p className='mt-12 text-center text-white opacity-50 md:mt-0 md:text-left'>
