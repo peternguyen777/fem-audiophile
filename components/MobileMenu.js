@@ -16,7 +16,7 @@ export default function MobileMenu({ mobMenuOpen, setMobMenuOpen }) {
         mobMenuOpen ? "translate-y-0" : "-translate-y-[calc(100%+1px)]"
       }`}
     >
-      <HomeMenu />
+      <HomeMenu setMobMenuOpen={setMobMenuOpen} />
     </div>
   );
 

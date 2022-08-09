@@ -23,13 +23,13 @@ function Footer() {
             <Link href='/'>
               <a className='text-white'>HOME</a>
             </Link>
-            <Link href='/'>
+            <Link href='/headphones'>
               <a className='text-white'>HEADPHONES</a>
             </Link>
-            <Link href='/'>
+            <Link href='/speakers'>
               <a className='text-white'>SPEAKERS</a>
             </Link>
-            <Link href='/'>
+            <Link href='/earphones'>
               <a className='text-white'>EARPHONES</a>
             </Link>
           </div>
