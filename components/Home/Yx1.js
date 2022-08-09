@@ -26,7 +26,7 @@ function Yx1() {
       <div className='relative mt-6 h-[200px] rounded-lg bg-gray md:mt-0 md:h-[320px]'>
         <div className='absolute top-1/2 left-6 -translate-y-1/2 md:left-10 lg:left-[95px]'>
           <h4 className='mb-8 text-black'>YX1 EARPHONES</h4>
-          <Button3>SEE PRODUCT</Button3>
+          <Button3 href='/earphones/yx1-earphones'>SEE PRODUCT</Button3>
         </div>
       </div>
     </div>

@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button1 from "./Button1";
 import { capitalizeFirstLetter } from "../utils/capitalize";
 
 function CardProduct({ item }) {
+  //remove '.' from beginning of string
   const mobImagePath = item.image.mobile.substring(1);
-
   const desktopImagePath = item.image.desktop.substring(1);
 
-  const str = item.name;
-  const substring = str.indexOf(capitalizeFirstLetter(item.category));
+  //find spot to insert breakpoint into title
+
+  let str = item.name;
+
+  if (item.category === "speakers") {
+    var itemType = item.category.slice(0, -1);
+  } else {
+    var itemType = item.category;
+  }
+
+  let substring = str.indexOf(capitalizeFirstLetter(itemType));
+
   const itemTitle = str.slice(0, substring - 1);
   const itemCategory = str.slice(substring);
 

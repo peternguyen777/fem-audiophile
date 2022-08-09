@@ -25,7 +25,7 @@ function Zx7() {
       />
       <div className='absolute left-6 top-1/2 -translate-y-1/2 md:left-[62px] lg:left-[95px]'>
         <h4 className='mb-8 text-black'>ZX7 SPEAKER</h4>
-        <Button3>SEE PRODUCT</Button3>
+        <Button3 href='/speakers/zx7-speaker'>SEE PRODUCT</Button3>
       </div>
     </div>
   );

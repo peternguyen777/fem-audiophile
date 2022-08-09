@@ -36,7 +36,7 @@ function Zx9() {
           truly remarkable sound.
         </p>
 
-        <Button2>SEE PRODUCT</Button2>
+        <Button2 href='/speakers/zx9-speaker'>SEE PRODUCT</Button2>
       </div>
 
       <svg

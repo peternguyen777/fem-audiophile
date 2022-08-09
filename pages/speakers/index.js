@@ -8,7 +8,7 @@ import Banner from "../../components/Headphones/Banner";
 import CardProduct from "../../components/UI/CardProduct";
 
 function SpeakersHome() {
-  const headphones = data
+  const categoryData = data
     .filter((item) => item.category === "speakers")
     .reverse();
 
@@ -22,7 +22,7 @@ function SpeakersHome() {
       <Banner category='SPEAKERS' />
       <main className='w-full max-w-[1190px] px-6 md:px-10 lg:mx-auto'>
         <div className='mt-16 space-y-[120px] md:mt-[120px] lg:mt-[160px]'>
-          {headphones.map((item) => (
+          {categoryData.map((item) => (
             <CardProduct item={item} key={item.id} />
           ))}
         </div>
