@@ -31,7 +31,9 @@ function Banner() {
             Experience natural, lifelike audio and exceptional build quality
             made for the passionate music enthusiast.
           </p>
-          <Button1>SEE PRODUCT</Button1>
+          <Button1 href='/headphones/xx99-mark-two-headphones'>
+            SEE PRODUCT
+          </Button1>
         </div>
       </div>
     </div>

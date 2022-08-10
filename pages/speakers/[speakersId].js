@@ -1,11 +1,22 @@
 import React from "react";
 import data from "../../public/data.json";
+import DetailProduct from "../../components/UI/DetailProduct";
+import Action from "../../components/Action";
+import Footer from "../../components/Footer";
+import HomeMenu from "../../components/HomeMenu";
 
 function Speakers({ projectData }) {
   return (
-    <div>
-      <h1>{projectData.name}</h1>
-    </div>
+    <>
+      <main className='w-full max-w-[1190px] px-6 md:px-10 lg:mx-auto'>
+        <DetailProduct projectData={projectData} />
+        <div className='mt-[172px] lg:mt-[240px]'>
+          <HomeMenu />
+        </div>
+        <Action />
+      </main>
+      <Footer />
+    </>
   );
 }
 
