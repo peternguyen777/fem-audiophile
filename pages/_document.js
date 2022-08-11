@@ -18,8 +18,9 @@ class MyDocument extends Document {
         </Head>
         <body>
           <Main />
-          <div id='mobMenu-root' />
 
+          <div id='cartMenu-root' />
+          <div id='mobMenu-root' />
           <NextScript />
         </body>
       </Html>

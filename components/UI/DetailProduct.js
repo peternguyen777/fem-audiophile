@@ -3,13 +3,13 @@ import Button1 from "../UI/Button1";
 import { useRouter } from "next/router";
 import CounterCart from "./CounterCart";
 
-function DetailProduct({ projectData, counter, setCounter }) {
+function DetailProduct({ projectData }) {
   const router = useRouter();
 
   return (
     <>
       <p
-        className='mt-4 cursor-pointer opacity-50 md:mt-8 lg:mt-[80px]'
+        className='mt-4 cursor-pointer font-medium opacity-50 hover:text-orange hover:opacity-100 md:mt-8 lg:mt-[80px]'
         onClick={() => router.back()}
       >
         Go Back
@@ -49,7 +49,8 @@ function DetailProduct({ projectData, counter, setCounter }) {
           <h6 className='mt-6 md:mt-8'>${projectData.price}</h6>
           {/* ADD TO CART */}
           <div className='mt-8 flex space-x-4 lg:mt-12'>
-            <CounterCart counter={counter} setCounter={setCounter} />
+            <CounterCart />
+
             <Button1>ADD TO CART</Button1>
           </div>
         </div>

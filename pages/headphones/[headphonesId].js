@@ -51,7 +51,9 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       projectData: post,
+      key: post.id,
     },
+
     revalidate: 60, //after 60s it will update the old cached version.
   };
 }

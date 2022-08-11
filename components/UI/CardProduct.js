@@ -1,29 +1,22 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Button1 from "./Button1";
-import { capitalizeFirstLetter } from "../utils/capitalize";
 
 function CardProduct({ item }) {
-  //remove '.' from beginning of string
-  const mobImagePath = item.image.mobile.substring(1);
-  const desktopImagePath = item.image.desktop.substring(1);
-
-  //find spot to insert breakpoint into title
-
   return (
     <div className='lg:flex lg:items-center lg:even:flex-row-reverse'>
       <div className='rounded-lg bg-gray'>
         <img
-          src={mobImagePath}
+          src={item.image.mobile.substring(1)}
           alt=''
           className='mx-auto h-[327px] rounded-lg object-contain md:hidden'
         />
         <img
-          src={mobImagePath}
+          src={item.image.mobile.substring(1)}
           alt=''
           className='mx-auto hidden rounded-lg object-contain md:block md:h-[352px] lg:hidden'
         />
         <img
-          src={desktopImagePath}
+          src={item.image.desktop.substring(1)}
           alt=''
           className='mx-auto hidden rounded-lg object-contain lg:block lg:w-[540px]'
         />

@@ -24,7 +24,7 @@ function HomeMenu(props) {
         <Image
           src={headphonesThumb}
           alt=''
-          className='absolute h-[140px] -translate-y-[38%] object-contain lg:h-[200px]'
+          className='absolute h-[140px] w-auto -translate-y-[38%] object-contain lg:h-[200px]'
         />
         <h6 className='mobmenu-h mt-[88px] lg:mt-[116px] lg:text-[18px] lg:leading-[24px] lg:tracking-[1.3px]'>
           HEADPHONES
@@ -51,7 +51,7 @@ function HomeMenu(props) {
         <Image
           src={speakersThumb}
           alt=''
-          className='absolute h-[140px] -translate-y-[40%] object-contain lg:h-[200px] lg:-translate-y-[35%]'
+          className='absolute h-[140px] w-auto -translate-y-[40%] object-contain lg:h-[200px] lg:-translate-y-[35%]'
         />
         <h6 className='mobmenu-h mt-[88px] lg:mt-[116px] lg:text-[18px] lg:leading-[24px] lg:tracking-[1.3px]'>
           SPEAKERS
@@ -78,7 +78,7 @@ function HomeMenu(props) {
         <Image
           src={earphonesThumb}
           alt=''
-          className='absolute h-[140px] -translate-y-[30%] object-contain lg:h-[180px]'
+          className='absolute h-[140px] w-auto -translate-y-[30%] object-contain lg:h-[180px]'
         />
         <h6 className='mobmenu-h mt-[88px] lg:mt-[116px] lg:text-[18px] lg:leading-[24px] lg:tracking-[1.3px]'>
           EARPHONES
