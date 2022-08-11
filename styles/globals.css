@@ -43,11 +43,19 @@
   a {
     @apply font-manrope text-[13px] font-bold leading-[25px] tracking-[2px] hover:text-orange;
   }
+
+  input {
+    @apply mt-[9px] h-14 w-full rounded-lg px-6 font-manrope text-[14px] font-bold leading-[19px] outline-none ring-1 ring-[#CFCFCF] placeholder:opacity-40 focus:ring-orange;
+  }
 }
 
 @layer components {
   .form-title {
     @apply text-[12px] font-normal leading-[16px] tracking-[8.5px] text-orange lg:text-[14px] lg:leading-[19px] lg:tracking-[10px];
+  }
+
+  .form-label {
+    @apply font-manrope text-[12px] font-bold leading-[16px] tracking-[-0.2px];
   }
 
   .sub-title {

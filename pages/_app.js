@@ -3,6 +3,8 @@ import Header from "../components/Header";
 import { useState, useEffect } from "react";
 import MobileMenu from "../components/MobileMenu";
 import Cart from "../components/Cart";
+import { Provider } from "react-redux";
+import { store } from "../store";
 
 function MyApp({ Component, pageProps }) {
   const [mobMenuOpen, setMobMenuOpen] = useState(false);
@@ -19,7 +21,7 @@ function MyApp({ Component, pageProps }) {
   });
 
   return (
-    <>
+    <Provider store={store}>
       <Header
         mobMenuOpen={mobMenuOpen}
         setMobMenuOpen={setMobMenuOpen}
@@ -29,7 +31,7 @@ function MyApp({ Component, pageProps }) {
       <MobileMenu mobMenuOpen={mobMenuOpen} setMobMenuOpen={setMobMenuOpen} />
       <Cart cartMenuOpen={cartMenuOpen} setCartMenuOpen={setCartMenuOpen} />
       <Component {...pageProps} />
-    </>
+    </Provider>
   );
 }
 

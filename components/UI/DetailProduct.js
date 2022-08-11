@@ -1,10 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
+import Button1Submit from "../UI/Button1Submit";
 import Button1 from "../UI/Button1";
 import { useRouter } from "next/router";
-import CounterCart from "./CounterCart";
+import CounterAddCart from "./CounterAddCart";
+import { addToCart } from "../../store/cartSlice";
+import { useDispatch } from "react-redux";
 
 function DetailProduct({ projectData }) {
+  const [counter, setCounter] = useState(1);
   const router = useRouter();
+  const dispatch = useDispatch();
+
+  const addItemToCart = () => {
+    const product = {
+      id: projectData.id,
+      name: projectData.name,
+      description: projectData.description,
+      category: projectData.category,
+      image: projectData.image.mobile.substring(1),
+      price: projectData.price,
+    };
+    for (let i = 0; i < counter; i++) {
+      dispatch(addToCart(product));
+    }
+  };
 
   return (
     <>
@@ -49,9 +68,9 @@ function DetailProduct({ projectData }) {
           <h6 className='mt-6 md:mt-8'>${projectData.price}</h6>
           {/* ADD TO CART */}
           <div className='mt-8 flex space-x-4 lg:mt-12'>
-            <CounterCart />
+            <CounterAddCart counter={counter} setCounter={setCounter} />
 
-            <Button1>ADD TO CART</Button1>
+            <Button1Submit onClick={addItemToCart}>ADD TO CART</Button1Submit>
           </div>
         </div>
       </div>
