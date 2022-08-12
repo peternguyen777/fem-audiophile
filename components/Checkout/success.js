@@ -109,7 +109,10 @@ export default function Success() {
                   (showMore ? (
                     <div className=''>
                       {restItems.map((item) => (
-                        <div className='mt-4 flex w-full items-center'>
+                        <div
+                          key={item.id}
+                          className='mt-4 flex w-full items-center'
+                        >
                           <img
                             src={item.image}
                             alt=''
