@@ -1,25 +1,40 @@
 import React from "react";
 import { Spin as Hamburger } from "hamburger-react";
 import Link from "next/link";
-import { useSelector } from "react-redux";
-import { selectItems } from "../store/cartSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { selectTotalQty } from "../store/cartSlice";
+import {
+  selectMenuIsVisible,
+  toggleMenu,
+  toggleMenuClose,
+  toggleCart,
+  toggleCartClose,
+} from "../store/uiSlice";
 
-function Header({
-  mobMenuOpen,
-  setMobMenuOpen,
-  cartMenuOpen,
-  setCartMenuOpen,
-}) {
-  const items = useSelector(selectItems);
+function Header() {
+  const dispatch = useDispatch();
+
+  const totalQuantity = useSelector(selectTotalQty);
+  const menuOpen = useSelector(selectMenuIsVisible);
+
+  const menuHandler = () => {
+    dispatch(toggleMenu());
+    dispatch(toggleCartClose());
+  };
+
+  const cartHandler = () => {
+    dispatch(toggleCart());
+    dispatch(toggleMenuClose());
+  };
 
   return (
     <>
       <header className='sticky top-0 z-50 h-[90px] w-full bg-charcoal'>
         <div className='absolute top-1/2 mx-auto flex w-full -translate-y-1/2 items-center justify-between pl-[10px] pr-6 md:pr-10 md:pl-[26px] lg:left-0 lg:right-0 lg:max-w-[1190px] lg:pl-10'>
-          <div className='lg:hidden' onClick={() => setCartMenuOpen(false)}>
+          <div className='lg:hidden'>
             <Hamburger
-              toggled={mobMenuOpen}
-              toggle={setMobMenuOpen}
+              toggled={menuOpen}
+              toggle={menuHandler}
               size={20}
               color='#fff'
               distance='lg'
@@ -51,23 +66,21 @@ function Header({
               <a className='text-white'>EARPHONES</a>
             </Link>
           </div>
-          <div className='relative'>
+          <div className='relative' onClick={cartHandler}>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               className='h-[20px] w-[23px] cursor-pointer fill-current text-white'
-              onClick={() => {
-                setMobMenuOpen(false);
-                setCartMenuOpen(!cartMenuOpen);
-              }}
             >
               <path
                 d='M8.625 15.833c1.132 0 2.054.935 2.054 2.084 0 1.148-.922 2.083-2.054 2.083-1.132 0-2.054-.935-2.054-2.083 0-1.15.922-2.084 2.054-2.084zm9.857 0c1.132 0 2.054.935 2.054 2.084 0 1.148-.922 2.083-2.054 2.083-1.132 0-2.053-.935-2.053-2.083 0-1.15.92-2.084 2.053-2.084zm-9.857 1.39a.69.69 0 00-.685.694.69.69 0 00.685.694.69.69 0 00.685-.694.69.69 0 00-.685-.695zm9.857 0a.69.69 0 00-.684.694.69.69 0 00.684.694.69.69 0 00.685-.694.69.69 0 00-.685-.695zM4.717 0c.316 0 .59.215.658.517l.481 2.122h16.47a.68.68 0 01.538.262c.127.166.168.38.11.579l-2.695 9.236a.672.672 0 01-.648.478H7.41a.667.667 0 00-.673.66c0 .364.303.66.674.66h12.219c.372 0 .674.295.674.66 0 .364-.302.66-.674.66H7.412c-1.115 0-2.021-.889-2.021-1.98 0-.812.502-1.511 1.218-1.816L4.176 1.32H.674A.667.667 0 010 .66C0 .296.302 0 .674 0zm16.716 3.958H6.156l1.797 7.917h11.17l2.31-7.917z'
                 fillRule='nonzero'
               />
             </svg>
-            <span className='absolute -top-[10px] -right-[10px] flex h-4 w-4 items-center justify-center rounded-full bg-orange text-[8px] text-white'>
-              {items.length}
-            </span>
+            {totalQuantity !== 0 && (
+              <span className='absolute -top-[10px] -right-[10px] flex h-4 w-4 items-center justify-center rounded-full bg-orange text-[8px] text-white'>
+                {totalQuantity}
+              </span>
+            )}
           </div>
         </div>
         <hr className='absolute left-0 right-0 mx-auto mt-[90px] w-full text-white opacity-20 md:w-[calc(100%-80px)] md:px-10 lg:max-w-[1110px]' />

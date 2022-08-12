@@ -4,6 +4,7 @@ import Button1 from "../UI/Button1";
 import { useRouter } from "next/router";
 import CounterAddCart from "./CounterAddCart";
 import { addToCart } from "../../store/cartSlice";
+import { toggleCartClose, toggleCartOpen } from "../../store/uiSlice";
 import { useDispatch } from "react-redux";
 
 function DetailProduct({ projectData }) {
@@ -15,14 +16,22 @@ function DetailProduct({ projectData }) {
     const product = {
       id: projectData.id,
       name: projectData.name,
-      description: projectData.description,
-      category: projectData.category,
       image: projectData.image.mobile.substring(1),
+      category: projectData.category,
       price: projectData.price,
     };
     for (let i = 0; i < counter; i++) {
       dispatch(addToCart(product));
     }
+    setTimeout(() => {
+      dispatch(toggleCartOpen());
+    }, 500);
+
+    clearTimeout();
+
+    setTimeout(() => {
+      dispatch(toggleCartClose());
+    }, 1500);
   };
 
   return (

@@ -14,7 +14,7 @@ function HomeMenu(props) {
     ) {
       return;
     } else {
-      props.setMobMenuOpen(false);
+      props.toggleMenuHandler();
     }
   };
 

@@ -4,6 +4,12 @@ import Footer from "../../components/Footer";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import Button1Submit from "../../components/UI/Button1Submit";
+import {
+  selectItems,
+  selectTotalQty,
+  selectTotalPrice,
+} from "../../store/cartSlice";
+import { useSelector } from "react-redux";
 
 function Checkout() {
   const router = useRouter();
@@ -18,6 +24,14 @@ function Checkout() {
 
   const paymentMethod = watch("payment");
 
+  const items = useSelector(selectItems);
+  const totalQty = useSelector(selectTotalQty);
+  const totalPrice = useSelector(selectTotalPrice);
+
+  const shippingPrice = 50;
+  const gstPrice = (totalPrice + shippingPrice) * 0.2;
+  const grandTotalPrice = totalPrice + gstPrice;
+
   useEffect(() => {
     if (isSubmitSuccessful) {
       reset();
@@ -28,25 +42,6 @@ function Checkout() {
   const onSubmit = (data) => {
     console.log(data);
   };
-
-  const sampleCartItem = (
-    <div className='flex items-center justify-between'>
-      <div className='flex w-full items-center'>
-        <img
-          src='/assets/product-yx1-earphones/mobile/image-product.jpg'
-          alt=''
-          className='mr-4 h-16 w-16 rounded-lg'
-        />
-        <div className='w-full'>
-          <div className='flex justify-between'>
-            <p className='font-bold'>XX99 MK II</p>
-            <p className='text-[14px] font-bold opacity-50'>x1</p>
-          </div>
-          <p className='text-[14px] font-bold opacity-50'>$2,999</p>
-        </div>
-      </div>
-    </div>
-  );
 
   return (
     <>
@@ -81,14 +76,14 @@ function Checkout() {
                   }`}
                 >
                   <p className='form-label'>Name</p>
-                  {errors.name && <p className='form-label'>Wrong format</p>}
+                  {errors.name && <p className='form-label'>Required</p>}
                 </label>
                 <input
                   {...register("name", { required: true })}
                   className={`${
                     errors.name && `ring-2 ring-[#CD2C2C] focus:ring-[#CD2C2C]`
                   }`}
-                  placeholder='Alexei Ward'
+                  placeholder='Peter Nguyen'
                 />
               </div>
               <div className='mt-6 md:mt-0 md:w-full'>
@@ -99,14 +94,14 @@ function Checkout() {
                   }`}
                 >
                   <p className='form-label'>Email Address</p>
-                  {errors.email && <p className='form-label'>Wrong format</p>}
+                  {errors.email && <p className='form-label'>Required</p>}
                 </label>
                 <input
                   {...register("email", { required: true })}
                   className={`${
                     errors.email && `ring-2 ring-[#CD2C2C] focus:ring-[#CD2C2C]`
                   }`}
-                  placeholder='alexei@mail.com'
+                  placeholder='peter.quang.nguyen@gmail.com'
                 />
               </div>
             </div>
@@ -118,14 +113,14 @@ function Checkout() {
                 }`}
               >
                 <p className='form-label'>Phone Number</p>
-                {errors.phone && <p className='form-label'>Wrong format</p>}
+                {errors.phone && <p className='form-label'>Required</p>}
               </label>
               <input
                 {...register("phone", { required: true })}
                 className={`${
                   errors.phone && `ring-2 ring-[#CD2C2C] focus:ring-[#CD2C2C]`
                 }`}
-                placeholder='+1 202-555-0136'
+                placeholder='+61 403 269 626'
               />
             </div>
 
@@ -139,70 +134,71 @@ function Checkout() {
                 }`}
               >
                 <p className='form-label'>Your Address</p>
-                {errors.address && <p className='form-label'>Wrong format</p>}
+                {errors.address && <p className='form-label'>Required</p>}
               </label>
               <input
                 {...register("address", { required: true })}
                 className={`${
                   errors.address && `ring-2 ring-[#CD2C2C] focus:ring-[#CD2C2C]`
                 }`}
-                placeholder='1137 Williams Avenue'
+                placeholder='1 Martin Place'
               />
             </div>
             <div className='md:mt-6 md:flex md:space-x-4'>
               <div className='mt-6 md:mt-0 md:w-full'>
                 <label
-                  htmlFor='zip'
+                  htmlFor='suburb'
                   className={`flex justify-between ${
-                    errors.zip && `text-[#CD2C2C]`
+                    errors.suburb && `text-[#CD2C2C]`
                   }`}
                 >
-                  <p className='form-label'>ZIP Code</p>
-                  {errors.zip && <p className='form-label'>Wrong format</p>}
+                  <p className='form-label'>Suburb</p>
+                  {errors.suburb && <p className='form-label'>Required</p>}
                 </label>
                 <input
-                  {...register("zip", { required: true })}
+                  {...register("suburb", { required: true })}
                   className={`${
-                    errors.zip && `ring-2 ring-[#CD2C2C] focus:ring-[#CD2C2C]`
+                    errors.suburb &&
+                    `ring-2 ring-[#CD2C2C] focus:ring-[#CD2C2C]`
                   }`}
-                  placeholder='10001'
+                  placeholder='Sydney'
                 />
               </div>
               <div className='mt-6 md:mt-0 md:w-full'>
                 <label
-                  htmlFor='city'
+                  htmlFor='state'
                   className={`flex justify-between ${
-                    errors.city && `text-[#CD2C2C]`
+                    errors.state && `text-[#CD2C2C]`
                   }`}
                 >
-                  <p className='form-label'>City</p>
-                  {errors.city && <p className='form-label'>Wrong format</p>}
+                  <p className='form-label'>State</p>
+                  {errors.state && <p className='form-label'>Required</p>}
                 </label>
                 <input
-                  {...register("city", { required: true })}
+                  {...register("state", { required: true })}
                   className={`${
-                    errors.city && `ring-2 ring-[#CD2C2C] focus:ring-[#CD2C2C]`
+                    errors.state && `ring-2 ring-[#CD2C2C] focus:ring-[#CD2C2C]`
                   }`}
-                  placeholder='New York'
+                  placeholder='New South Wales'
                 />
               </div>
             </div>
             <div className='mt-6 md:w-[calc(50%-8px)]'>
               <label
-                htmlFor='country'
+                htmlFor='pcode'
                 className={`flex justify-between ${
-                  errors.country && `text-[#CD2C2C]`
+                  errors.pcode && `text-[#CD2C2C]`
                 }`}
               >
-                <p className='form-label'>Country</p>
-                {errors.country && <p className='form-label'>Wrong format</p>}
+                <p className='form-label'>Post Code</p>
+                {errors.pcode && <p className='form-label'>Required</p>}
               </label>
               <input
-                {...register("country", { required: true })}
+                {...register("pcode", { required: true })}
                 className={`${
-                  errors.country && `ring-2 ring-[#CD2C2C] focus:ring-[#CD2C2C]`
+                  errors.pcode && `ring-2 ring-[#CD2C2C] focus:ring-[#CD2C2C]`
                 }`}
-                placeholder='United States'
+                placeholder='2000'
               />
             </div>
 
@@ -292,9 +288,7 @@ function Checkout() {
                     }`}
                   >
                     <p className='form-label'>e-Money Number</p>
-                    {errors.eMoneyNum && (
-                      <p className='form-label'>Wrong format</p>
-                    )}
+                    {errors.eMoneyNum && <p className='form-label'>Required</p>}
                   </label>
                   <input
                     {...register("eMoneyNum", { required: true })}
@@ -313,9 +307,7 @@ function Checkout() {
                     }`}
                   >
                     <p className='form-label'>e-Money PIN</p>
-                    {errors.eMoneyPin && (
-                      <p className='form-label'>Wrong format</p>
-                    )}
+                    {errors.eMoneyPin && <p className='form-label'>Required</p>}
                   </label>
                   <input
                     {...register("eMoneyPin", { required: true })}
@@ -335,27 +327,76 @@ function Checkout() {
               <h6>SUMMARY</h6>
             </div>
             <div className='mt-8 space-y-6'>
-              {sampleCartItem}
-              {sampleCartItem}
-              {sampleCartItem}
+              {items.map((item) => {
+                if (item.category === "speakers") {
+                  var itemNameShort = item.name
+                    .toLowerCase()
+                    .replace("speaker", "");
+                } else {
+                  var itemNameShort = item.name
+                    .toLowerCase()
+                    .replace(item.category, "");
+                }
+
+                return (
+                  <div
+                    key={item.id}
+                    className='flex items-center justify-between'
+                  >
+                    <div className='flex w-full items-center'>
+                      <img
+                        src={item.image}
+                        alt=''
+                        className='mr-4 h-16 w-16 rounded-lg'
+                      />
+                      <div className='w-full'>
+                        <div className='flex justify-between'>
+                          <p className='font-bold'>
+                            {itemNameShort.trim().toUpperCase()}
+                          </p>
+                          <p className='text-[14px] font-bold opacity-50'>
+                            x{item.quantity}
+                          </p>
+                        </div>
+                        <p className='text-[14px] font-bold opacity-50'>
+                          ${item.price.toLocaleString()}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
             <div className='mt-8 flex items-center justify-between'>
               <p className='font-medium opacity-50'>TOTAL</p>
-              <h6>$5,396</h6>
+              <h6>${totalPrice.toFixed(2).toLocaleString()}</h6>
             </div>
             <div className='mt-2 flex items-center justify-between'>
               <p className='font-medium opacity-50'>SHIPPING</p>
-              <h6>$50</h6>
+              <h6>
+                $
+                {totalQty === 0
+                  ? `0.00`
+                  : shippingPrice.toFixed(2).toLocaleString()}
+              </h6>
             </div>
             <div className='mt-2 flex items-center justify-between'>
-              <p className='font-medium opacity-50'>VAT (INCLUDED)</p>
-              <h6>$1,079</h6>
+              <p className='font-medium opacity-50'>GST (INCLUDED)</p>
+              <h6>
+                $
+                {totalQty === 0 ? `0.00` : gstPrice.toFixed(2).toLocaleString()}
+              </h6>
             </div>
             <div className='mt-6 mb-8 flex items-center justify-between'>
               <p className='font-medium opacity-50'>GRAND TOTAL</p>
-              <h6 className='text-orange'>$5,446</h6>
+              <h6 className='text-orange'>
+                $
+                {totalQty === 0
+                  ? `0.00`
+                  : grandTotalPrice.toFixed(2).toLocaleString()}
+              </h6>
             </div>
-            <Button1Submit full submit>
+            <Button1Submit full submit disabled={totalQty === 0 ? true : false}>
               CONTINUE &#38; PAY
             </Button1Submit>
           </div>
