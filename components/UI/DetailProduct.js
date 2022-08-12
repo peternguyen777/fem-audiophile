@@ -75,7 +75,9 @@ function DetailProduct({ projectData }) {
             {projectData.name}
           </h2>
           <p className='mt-6 opacity-50 md:mt-8'>{projectData.description}</p>
-          <h6 className='mt-6 md:mt-8'>${projectData.price}</h6>
+          <h6 className='mt-6 md:mt-8'>
+            ${projectData.price.toLocaleString()}
+          </h6>
           {/* ADD TO CART */}
           <div className='mt-8 flex space-x-4 lg:mt-12'>
             <CounterAddCart counter={counter} setCounter={setCounter} />

@@ -357,7 +357,12 @@ function Checkout() {
             </div>
             <div className='mt-8 flex items-center justify-between'>
               <p className='font-medium opacity-50'>TOTAL</p>
-              <h6>${totalPrice.toFixed(2).toLocaleString()}</h6>
+              <h6>
+                $
+                {totalPrice.toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                })}
+              </h6>
             </div>
             <div className='mt-2 flex items-center justify-between'>
               <p className='font-medium opacity-50'>SHIPPING</p>
@@ -365,14 +370,20 @@ function Checkout() {
                 $
                 {totalQty === 0
                   ? `0.00`
-                  : shippingPrice.toFixed(2).toLocaleString()}
+                  : shippingPrice.toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                    })}
               </h6>
             </div>
             <div className='mt-2 flex items-center justify-between'>
               <p className='font-medium opacity-50'>GST (INCLUDED)</p>
               <h6>
                 $
-                {totalQty === 0 ? `0.00` : gstPrice.toFixed(2).toLocaleString()}
+                {totalQty === 0
+                  ? `0.00`
+                  : gstPrice.toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                    })}
               </h6>
             </div>
             <div className='mt-6 mb-8 flex items-center justify-between'>
@@ -381,7 +392,9 @@ function Checkout() {
                 $
                 {totalQty === 0
                   ? `0.00`
-                  : grandTotalPrice.toFixed(2).toLocaleString()}
+                  : grandTotalPrice.toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                    })}
               </h6>
             </div>
             <Button1Submit full submit disabled={totalQty === 0 ? true : false}>

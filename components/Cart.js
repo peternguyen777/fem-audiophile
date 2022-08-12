@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import ReactDOM from "react-dom";
 import CounterCart from "./UI/CounterCart";
@@ -19,6 +19,12 @@ export default function Cart() {
   useEffect(() => {
     setIsBrowser(true);
   }, []);
+
+  const AlwaysScrollToBottom = () => {
+    const elementRef = useRef();
+    useEffect(() => elementRef.current.scrollIntoView());
+    return <div ref={elementRef} />;
+  };
 
   const items = useSelector(selectItems);
   const totalPrice = useSelector(selectTotalPrice);
@@ -53,7 +59,7 @@ export default function Cart() {
             className='hidden h-auto grow rounded-l-lg md:inline-block'
             onClick={toggleCartHandler}
           ></div>
-          <div className='mx-auto w-full flex-none rounded-lg bg-white py-8 px-[28px] md:w-[377px]'>
+          <div className='mx-auto w-full flex-none rounded-lg bg-white py-8 px-[28px] md:w-[377px] '>
             <div className='flex items-center justify-between'>
               <h6>CART ({totalQuantity})</h6>
               <p
@@ -63,10 +69,13 @@ export default function Cart() {
                 Remove All
               </p>
             </div>
-            <div className='mobCartScroll mt-8 space-y-6 overflow-y-scroll '>
+            <div className='mt-8 max-h-[280px] overflow-y-scroll sm:max-h-full sm:overflow-auto'>
               {items.map((item, i) => {
                 return (
-                  <div key={i} className='flex items-center justify-between'>
+                  <div
+                    key={i}
+                    className='mt-6 flex items-center justify-between first:mt-0'
+                  >
                     <div className='flex items-center'>
                       <img
                         src={item.image}
@@ -76,7 +85,7 @@ export default function Cart() {
                       <div>
                         <p className='font-bold'>{item.nameShort}</p>
                         <p className='text-[14px] font-bold opacity-50'>
-                          ${item.price}
+                          ${item.price.toLocaleString()}
                         </p>
                       </div>
                     </div>
@@ -84,10 +93,11 @@ export default function Cart() {
                   </div>
                 );
               })}
+              <AlwaysScrollToBottom />
             </div>
             <div className='mt-8 mb-6 flex items-center justify-between'>
               <p className='font-medium opacity-50'>TOTAL</p>
-              <h6>${totalPrice}</h6>
+              <h6>${totalPrice.toLocaleString()}</h6>
             </div>
             <Button1
               full
