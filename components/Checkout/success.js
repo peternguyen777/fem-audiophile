@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import ReactDOM from "react-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,11 +12,15 @@ import { selectSuccessIsVisible, toggleSuccess } from "../../store/uiSlice";
 import { useRouter } from "next/router";
 import Button1 from "../UI/Button1";
 
+import Animation from "./animation";
+
 export default function Success() {
   const [isBrowser, setIsBrowser] = useState(false);
   const [showMore, setShowMore] = useState(false);
+
   const dispatch = useDispatch();
   const router = useRouter();
+
   useEffect(() => {
     setIsBrowser(true);
   }, []);
@@ -30,9 +34,7 @@ export default function Success() {
 
   const closeSuccessHandler = () => {
     dispatch(toggleSuccess());
-
     dispatch(removeAllFromCart());
-
     router.push("/");
   };
 
@@ -53,22 +55,13 @@ export default function Success() {
           className='fixed top-[224px] left-6 right-6 z-30 mx-auto flex max-w-[540px] rounded-lg bg-white p-8 md:p-12 lg:top-[156px]'
         >
           <div className='w-full'>
-            <svg xmlns='http://www.w3.org/2000/svg' className='h-16 w-16'>
-              <g fill='none' fillRule='evenodd'>
-                <circle fill='#D87D4A' cx='32' cy='32' r='32' />
-                <path
-                  stroke='#FFF'
-                  stroke-width='4'
-                  d='m20.754 33.333 6.751 6.751 15.804-15.803'
-                />
-              </g>
-            </svg>
-            <h5 className='mt-4 leading-[28px] tracking-[0.86px] md:hidden'>
+            <Animation />
+            <h5 className='-mt-[2px] leading-[28px] tracking-[0.86px] md:hidden'>
               THANK YOU
               <br />
               FOR YOUR ORDER
             </h5>
-            <h3 className='hidden md:mt-8 md:block '>
+            <h3 className='hidden md:mt-[6px] md:block '>
               THANK YOU
               <br />
               FOR YOUR ORDER
@@ -139,7 +132,13 @@ export default function Success() {
                   ))}
               </div>
               <div className='relative rounded-b-lg bg-black px-6 pb-[19px] pt-[15px] md:w-[198px] md:flex-none md:rounded-l-none md:rounded-r-lg md:p-0 md:pl-6'>
-                <div className='md:absolute md:bottom-[41px]'>
+                <div
+                  className={`md:absolute ${
+                    otherItems
+                      ? `md:bottom-[41px]`
+                      : `md:top-1/2 md:-translate-y-1/2`
+                  } `}
+                >
                   <p className='text-white opacity-50'>GRAND TOTAL</p>
                   <h6 className='mt-2 text-white'>
                     ${grandPrice.toLocaleString()}
