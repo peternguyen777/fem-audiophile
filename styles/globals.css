@@ -78,4 +78,13 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+
+  .mobCartScroll::-webkit-scrollbar {
+    display: none; /* Chrome and Safari */
+  }
+
+  .mobCartScroll {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 }

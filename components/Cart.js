@@ -63,7 +63,7 @@ export default function Cart() {
                 Remove All
               </p>
             </div>
-            <div className='mt-8 space-y-6'>
+            <div className='mobCartScroll mt-8 space-y-6 overflow-y-scroll '>
               {items.map((item, i) => {
                 if (item.category === "speakers") {
                   var itemNameShort = item.name
