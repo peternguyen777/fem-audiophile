@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   cartIsVisible: false,
   menuIsVisible: false,
+  successIsVisible: false,
 };
 
 const uiSlice = createSlice({
@@ -24,6 +25,9 @@ const uiSlice = createSlice({
     toggleMenuClose: (state) => {
       state.menuIsVisible = false;
     },
+    toggleSuccess: (state) => {
+      state.successIsVisible = !state.successIsVisible;
+    },
   },
 });
 
@@ -33,9 +37,11 @@ export const {
   toggleCartClose,
   toggleCartOpen,
   toggleMenuClose,
+  toggleSuccess,
 } = uiSlice.actions;
 
 export const selectCartIsVisible = (state) => state.ui.cartIsVisible;
 export const selectMenuIsVisible = (state) => state.ui.menuIsVisible;
+export const selectSuccessIsVisible = (state) => state.ui.successIsVisible;
 
 export default uiSlice.reducer;

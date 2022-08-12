@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import ReactDOM from "react-dom";
 import CounterCart from "./UI/CounterCart";
@@ -19,12 +19,6 @@ export default function Cart() {
   useEffect(() => {
     setIsBrowser(true);
   }, []);
-
-  const AlwaysScrollToBottom = () => {
-    const elementRef = useRef();
-    useEffect(() => elementRef.current.scrollIntoView());
-    return <div ref={elementRef} />;
-  };
 
   const items = useSelector(selectItems);
   const totalPrice = useSelector(selectTotalPrice);
@@ -93,7 +87,6 @@ export default function Cart() {
                   </div>
                 );
               })}
-              <AlwaysScrollToBottom />
             </div>
             <div className='mt-8 mb-6 flex items-center justify-between'>
               <p className='font-medium opacity-50'>TOTAL</p>
