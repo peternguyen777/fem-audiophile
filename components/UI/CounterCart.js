@@ -9,6 +9,7 @@ function CounterCart({ item }) {
     const productToAdd = {
       id: item.id,
       name: item.name,
+      nameShort: item.nameShort,
       image: item.image,
       price: item.price,
       category: item.category,

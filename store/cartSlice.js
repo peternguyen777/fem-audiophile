@@ -19,10 +19,11 @@ export const cartSlice = createSlice({
         state.items.push({
           id: newItem.id,
           price: newItem.price,
+          name: newItem.name,
+          nameShort: newItem.nameShort,
+          category: newItem.category,
           image: newItem.image,
           quantity: 1,
-          name: newItem.name,
-          category: newItem.category,
         });
       } else {
         existingItem.quantity++;

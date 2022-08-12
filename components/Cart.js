@@ -65,16 +65,6 @@ export default function Cart() {
             </div>
             <div className='mobCartScroll mt-8 space-y-6 overflow-y-scroll '>
               {items.map((item, i) => {
-                if (item.category === "speakers") {
-                  var itemNameShort = item.name
-                    .toLowerCase()
-                    .replace("speaker", "");
-                } else {
-                  var itemNameShort = item.name
-                    .toLowerCase()
-                    .replace(item.category, "");
-                }
-
                 return (
                   <div key={i} className='flex items-center justify-between'>
                     <div className='flex items-center'>
@@ -84,9 +74,7 @@ export default function Cart() {
                         className='mr-4 h-16 w-16 rounded-lg'
                       />
                       <div>
-                        <p className='font-bold'>
-                          {itemNameShort.toUpperCase()}
-                        </p>
+                        <p className='font-bold'>{item.nameShort}</p>
                         <p className='text-[14px] font-bold opacity-50'>
                           ${item.price}
                         </p>

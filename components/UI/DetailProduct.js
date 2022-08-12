@@ -16,6 +16,7 @@ function DetailProduct({ projectData }) {
     const product = {
       id: projectData.id,
       name: projectData.name,
+      nameShort: projectData.nameShort,
       image: projectData.image.mobile.substring(1),
       category: projectData.category,
       price: projectData.price,

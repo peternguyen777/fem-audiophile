@@ -328,16 +328,6 @@ function Checkout() {
             </div>
             <div className='mt-8 space-y-6'>
               {items.map((item) => {
-                if (item.category === "speakers") {
-                  var itemNameShort = item.name
-                    .toLowerCase()
-                    .replace("speaker", "");
-                } else {
-                  var itemNameShort = item.name
-                    .toLowerCase()
-                    .replace(item.category, "");
-                }
-
                 return (
                   <div
                     key={item.id}
@@ -351,9 +341,7 @@ function Checkout() {
                       />
                       <div className='w-full'>
                         <div className='flex justify-between'>
-                          <p className='font-bold'>
-                            {itemNameShort.trim().toUpperCase()}
-                          </p>
+                          <p className='font-bold'>{item.nameShort}</p>
                           <p className='text-[14px] font-bold opacity-50'>
                             x{item.quantity}
                           </p>
