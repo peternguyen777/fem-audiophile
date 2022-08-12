@@ -227,6 +227,28 @@ function Checkout() {
               <div className='md:w-[calc(50%-8px)]'>
                 <div
                   className={`mt-4 flex h-14 w-full cursor-pointer items-center rounded-lg ring-1 ring-[#CFCFCF] hover:ring-orange md:mt-0 ${
+                    paymentMethod === "Stripe" && `ring-orange`
+                  }`}
+                  onClick={() => {
+                    setValue("eMoneyNum", "");
+                    setValue("eMoneyPin", "");
+                    setValue("payment", "Stripe");
+                  }}
+                >
+                  <input
+                    {...register("payment", { required: true })}
+                    type='radio'
+                    value='Stripe'
+                    className={`my-0 mx-[25px] h-[10px] w-[10px] cursor-pointer appearance-none  rounded-full p-0 ring-1 ring-[#CFCFCF] ring-offset-[5px] ${
+                      paymentMethod === "Stripe" && `bg-orange `
+                    }`}
+                  />
+                  <label htmlFor='payment' className='mt-0'>
+                    <p className='form-label'>Stripe</p>
+                  </label>
+                </div>
+                <div
+                  className={`mt-4 flex h-14 w-full cursor-pointer items-center rounded-lg ring-1 ring-[#CFCFCF] hover:ring-orange ${
                     paymentMethod === "e-Money" && `ring-orange`
                   }`}
                   onClick={() => setValue("payment", "e-Money")}
@@ -409,9 +431,26 @@ function Checkout() {
                     })}
               </h6>
             </div>
-            <Button1Submit full submit disabled={totalQty === 0 ? true : false}>
-              CONTINUE &#38; PAY
-            </Button1Submit>
+            {paymentMethod === "Stripe" ? (
+              <button
+                type='submit'
+                role='link'
+                disabled={totalQty === 0 ? true : false}
+                className='flex h-12 w-full flex-shrink-0 cursor-pointer items-center justify-center bg-orange transition-colors duration-200 hover:bg-lightorange disabled:bg-[#9ca3af]'
+              >
+                <p className='select-none font-manrope text-[13px] leading-[18px] tracking-[1px] text-white'>
+                  {totalQty === 0 ? `CART EMPTY` : `CONTINUE & PAY`}
+                </p>
+              </button>
+            ) : (
+              <Button1Submit
+                full
+                submit
+                disabled={totalQty === 0 ? true : false}
+              >
+                CONTINUE &#38; PAY
+              </Button1Submit>
+            )}
           </div>
         </form>
       </main>

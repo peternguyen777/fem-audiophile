@@ -27,7 +27,7 @@ export default function Success() {
 
   useEffect(() => {
     function handleResize() {
-      if (window.innerWidth < 768) {
+      if (window.innerWidth < 1440) {
         setShowMore(false);
       }
     }
@@ -48,7 +48,7 @@ export default function Success() {
   };
 
   const expandHandler = () => {
-    if (window.innerWidth < 768) {
+    if (window.innerWidth < 1440) {
       return;
     }
     setShowMore(true);
@@ -68,7 +68,7 @@ export default function Success() {
           transition={{
             duration: 0.3,
           }}
-          className='fixed top-[114px] left-6 right-6 z-30 mx-auto flex max-w-[540px] rounded-lg bg-white p-8 md:top-[222px] md:p-12'
+          className='fixed top-[114px] left-6 right-6 z-30 mx-auto flex max-w-[540px] rounded-lg bg-white p-8 md:top-[122px] md:p-12'
         >
           <div className='w-full'>
             <Animation />

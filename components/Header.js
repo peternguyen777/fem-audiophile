@@ -9,6 +9,7 @@ import {
   toggleMenuClose,
   toggleCart,
   toggleCartClose,
+  selectSuccessIsVisible,
 } from "../store/uiSlice";
 
 function Header() {
@@ -16,6 +17,7 @@ function Header() {
 
   const totalQuantity = useSelector(selectTotalQty);
   const menuOpen = useSelector(selectMenuIsVisible);
+  const success = useSelector(selectSuccessIsVisible);
 
   const menuHandler = () => {
     dispatch(toggleMenu());
@@ -23,8 +25,12 @@ function Header() {
   };
 
   const cartHandler = () => {
-    dispatch(toggleCart());
-    dispatch(toggleMenuClose());
+    if (success) {
+      return;
+    } else {
+      dispatch(toggleCart());
+      dispatch(toggleMenuClose());
+    }
   };
 
   return (
@@ -76,7 +82,7 @@ function Header() {
                 fillRule='nonzero'
               />
             </svg>
-            {totalQuantity !== 0 && (
+            {!success && totalQuantity !== 0 && (
               <span className='absolute -top-[10px] -right-[10px] flex h-4 w-4 items-center justify-center rounded-full bg-orange text-[8px] text-white'>
                 {totalQuantity}
               </span>
