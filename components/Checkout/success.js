@@ -25,6 +25,15 @@ export default function Success() {
     setIsBrowser(true);
   }, []);
 
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < 768) {
+        setShowMore(false);
+      }
+    }
+    window.addEventListener("resize", handleResize);
+  });
+
   const success = useSelector(selectSuccessIsVisible);
   const items = useSelector(selectItems);
   const totalQty = useSelector(selectTotalQty);
@@ -36,6 +45,13 @@ export default function Success() {
     dispatch(toggleSuccess());
     dispatch(removeAllFromCart());
     router.push("/");
+  };
+
+  const expandHandler = () => {
+    if (window.innerWidth < 768) {
+      return;
+    }
+    setShowMore(true);
   };
 
   if (totalQty - items[0].quantity > 0) {
@@ -52,7 +68,7 @@ export default function Success() {
           transition={{
             duration: 0.3,
           }}
-          className='fixed top-[224px] left-6 right-6 z-30 mx-auto flex max-w-[540px] rounded-lg bg-white p-8 md:p-12 lg:top-[156px]'
+          className='fixed top-[114px] left-6 right-6 z-30 mx-auto flex max-w-[540px] rounded-lg bg-white p-8 md:top-[222px] md:p-12'
         >
           <div className='w-full'>
             <Animation />
@@ -91,39 +107,37 @@ export default function Success() {
                 </div>
                 {otherItems &&
                   (showMore ? (
-                    <div>
+                    <div className=''>
                       {restItems.map((item) => (
-                        <>
-                          <div className='mt-4 flex w-full items-center'>
-                            <img
-                              src={item.image}
-                              alt=''
-                              className='mr-4 h-[50px] w-[50px] rounded-lg'
-                            />
-                            <div className='w-full'>
-                              <div className='flex items-center justify-between'>
-                                <p className='font-bold'>{item.nameShort}</p>
-                                <p className='font-bold opacity-50'>
-                                  x{item.quantity}
-                                </p>
-                              </div>
-                              <p className='text-[14px] font-bold opacity-50'>
-                                ${item.price.toLocaleString()}
+                        <div className='mt-4 flex w-full items-center'>
+                          <img
+                            src={item.image}
+                            alt=''
+                            className='mr-4 h-[50px] w-[50px] rounded-lg'
+                          />
+                          <div className='w-full'>
+                            <div className='flex items-center justify-between'>
+                              <p className='font-bold'>{item.nameShort}</p>
+                              <p className='font-bold opacity-50'>
+                                x{item.quantity}
                               </p>
                             </div>
+                            <p className='text-[14px] font-bold opacity-50'>
+                              ${item.price.toLocaleString()}
+                            </p>
                           </div>
-                          <hr className='my-3 opacity-[8%]' />
-                          <p
-                            onClick={() => setShowMore(false)}
-                            className='cursor-pointer text-center text-[12px] font-bold leading-[16px] tracking-[-0.2px] opacity-50'
-                          >
-                            View Less
-                          </p>
-                        </>
+                        </div>
                       ))}
+                      <hr className='my-3 opacity-[8%]' />
+                      <p
+                        onClick={() => setShowMore(false)}
+                        className='cursor-pointer text-center text-[12px] font-bold leading-[16px] tracking-[-0.2px] opacity-50'
+                      >
+                        View Less
+                      </p>
                     </div>
                   ) : (
-                    <div onClick={() => setShowMore(true)}>
+                    <div onClick={expandHandler}>
                       <hr className='my-3 opacity-[8%]' />
                       <p className='cursor-pointer text-center text-[12px] font-bold leading-[16px] tracking-[-0.2px] opacity-50'>
                         and {totalQty - items[0]?.quantity} other item(s)
