@@ -20,7 +20,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 
-const stripePromise = loadStripe(process.env.stripe_public_key);
+const stripePromise = loadStripe(`${process.env.stripe_public_key}`);
 
 function Checkout() {
   const router = useRouter();
