@@ -4,6 +4,9 @@ import Footer from "../../components/Footer";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import Button1Submit from "../../components/UI/Button1Submit";
+import Success from "../../components/Checkout/success";
+
+//redux
 import {
   selectItems,
   selectTotalQty,
@@ -12,7 +15,12 @@ import {
 } from "../../store/cartSlice";
 import { selectSuccessIsVisible, toggleSuccess } from "../../store/uiSlice";
 import { useSelector, useDispatch } from "react-redux";
-import Success from "../../components/Checkout/success";
+
+//stripe
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
+
+const stripePromise = loadStripe(process.env.stripe_public_key);
 
 function Checkout() {
   const router = useRouter();
@@ -39,14 +47,40 @@ function Checkout() {
   dispatch(setGrandPrice(grandTotalPrice));
 
   useEffect(() => {
-    if (isSubmitSuccessful) {
+    if (router.query.success && items.length > 0) {
       dispatch(toggleSuccess());
+    }
+  }, [router.query.success]);
+
+  useEffect(() => {
+    if (isSubmitSuccessful && paymentMethod !== "Stripe") {
+      router.push("/checkout?success=true", undefined, { shallow: true });
       console.log("successful");
     }
   }, [isSubmitSuccessful, reset]);
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
+    if (paymentMethod === "Stripe") {
+      createCheckoutSession(data);
+    }
+  };
+
+  const createCheckoutSession = async (data) => {
+    const stripe = await stripePromise;
+
+    const checkoutSession = await axios.post("api/create-checkout-session", {
+      items,
+      data,
+    });
+
+    const result = await stripe.redirectToCheckout({
+      sessionId: checkoutSession.data.id,
+    });
+
+    if (result.error) {
+      alert(result.error.message);
+    }
   };
 
   return (
@@ -230,8 +264,8 @@ function Checkout() {
                     paymentMethod === "Stripe" && `ring-orange`
                   }`}
                   onClick={() => {
-                    setValue("eMoneyNum", "");
-                    setValue("eMoneyPin", "");
+                    // setValue("eMoneyNum", "");
+                    // setValue("eMoneyPin", "");
                     setValue("payment", "Stripe");
                   }}
                 >
@@ -244,10 +278,10 @@ function Checkout() {
                     }`}
                   />
                   <label htmlFor='payment' className='mt-0'>
-                    <p className='form-label'>Stripe</p>
+                    <p className='form-label'>Credit/Debit Card (via Stripe)</p>
                   </label>
                 </div>
-                <div
+                {/* <div
                   className={`mt-4 flex h-14 w-full cursor-pointer items-center rounded-lg ring-1 ring-[#CFCFCF] hover:ring-orange ${
                     paymentMethod === "e-Money" && `ring-orange`
                   }`}
@@ -264,14 +298,14 @@ function Checkout() {
                   <label htmlFor='payment' className='mt-0'>
                     <p className='form-label'>e-Money</p>
                   </label>
-                </div>
+                </div> */}
                 <div
                   className={`mt-4 flex h-14 w-full cursor-pointer items-center rounded-lg ring-1 ring-[#CFCFCF] hover:ring-orange ${
                     paymentMethod === "Cash on Delivery" && `ring-orange`
                   }`}
                   onClick={() => {
-                    setValue("eMoneyNum", "");
-                    setValue("eMoneyPin", "");
+                    // setValue("eMoneyNum", "");
+                    // setValue("eMoneyPin", "");
                     setValue("payment", "Cash on Delivery");
                   }}
                 >
@@ -312,7 +346,7 @@ function Checkout() {
                 </p>
               </div>
             )}
-            {paymentMethod === "e-Money" && (
+            {/* {paymentMethod === "e-Money" && (
               <div className='md:mt-6 md:flex md:space-x-4'>
                 <div className='mt-11 md:mt-0 md:w-full'>
                   <label
@@ -353,7 +387,7 @@ function Checkout() {
                   />
                 </div>
               </div>
-            )}
+            )} */}
           </div>
 
           <div className='mx-auto mt-8 w-full flex-none rounded-lg bg-white py-8 px-6 md:p-8 lg:mt-0 lg:h-fit lg:w-[350px]'>

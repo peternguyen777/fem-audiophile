@@ -54,8 +54,8 @@ export default function Success() {
     setShowMore(true);
   };
 
-  if (totalQty - items[0].quantity > 0) {
-    var otherItems = totalQty - items[0].quantity;
+  if (totalQty - items[0]?.quantity > 0) {
+    var otherItems = totalQty - items[0]?.quantity;
   }
 
   const modalContent = (
