@@ -14,6 +14,11 @@ import {
   setGrandPrice,
 } from "../../store/cartSlice";
 import { selectSuccessIsVisible, toggleSuccess } from "../../store/uiSlice";
+import {
+  submitCheckout,
+  eraseCheckout,
+  selectData,
+} from "../../store/checkoutSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 //stripe
@@ -40,6 +45,7 @@ function Checkout() {
   const totalQty = useSelector(selectTotalQty);
   const totalPrice = useSelector(selectTotalPrice);
   const success = useSelector(selectSuccessIsVisible);
+  const formData = useSelector(selectData);
 
   const shippingPrice = 50;
   const gstPrice = (totalPrice + shippingPrice) * 0.1;
@@ -49,8 +55,38 @@ function Checkout() {
   useEffect(() => {
     if (router.query.success && items.length > 0) {
       dispatch(toggleSuccess());
+      setValue("name", formData.name);
+      setValue("email", formData.email);
+      setValue("phone", formData.phone);
+      setValue("address", formData.address);
+      setValue("suburb", formData.suburb);
+      setValue("state", formData.state);
+      setValue("pcode", formData.pcode);
+      setValue("payment", formData.payment);
     }
-  }, [router.query.success]);
+
+    if (router.query.cancel) {
+      setValue("name", formData.name);
+      setValue("email", formData.email);
+      setValue("phone", formData.phone);
+      setValue("address", formData.address);
+      setValue("suburb", formData.suburb);
+      setValue("state", formData.state);
+      setValue("pcode", formData.pcode);
+      setValue("payment", formData.payment);
+    }
+  }, [router.query.success, router.query.cancel]);
+
+  useEffect(() => {
+    setValue("name", formData.name);
+    setValue("email", formData.email);
+    setValue("phone", formData.phone);
+    setValue("address", formData.address);
+    setValue("suburb", formData.suburb);
+    setValue("state", formData.state);
+    setValue("pcode", formData.pcode);
+    setValue("payment", formData.payment);
+  }, []);
 
   useEffect(() => {
     if (isSubmitSuccessful && paymentMethod !== "Stripe") {
@@ -60,11 +96,14 @@ function Checkout() {
   }, [isSubmitSuccessful, reset]);
 
   const onSubmit = (data) => {
-    // console.log(data);
+    dispatch(submitCheckout(data));
+
     if (paymentMethod === "Stripe") {
       createCheckoutSession(data);
     }
   };
+
+  console.log("init form data:", formData);
 
   const createCheckoutSession = async (data) => {
     const stripe = await stripePromise;

@@ -26,7 +26,7 @@ export default async (req, res) => {
     line_items: transformedItems,
     mode: "payment",
     success_url: `${process.env.HOST}/checkout?success=true`,
-    cancel_url: `${process.env.HOST}/checkout`,
+    cancel_url: `${process.env.HOST}/checkout?cancel=true`,
     metadata: {
       data: JSON.stringify(data),
       items: JSON.stringify(items),

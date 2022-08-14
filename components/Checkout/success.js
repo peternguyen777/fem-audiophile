@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import ReactDOM from "react-dom";
+import { useRouter } from "next/router";
+import Button1 from "../UI/Button1";
+import Animation from "./animation";
+
+//redux
 import { useSelector, useDispatch } from "react-redux";
 import {
   removeAllFromCart,
@@ -9,10 +14,7 @@ import {
   selectTotalQty,
 } from "../../store/cartSlice";
 import { selectSuccessIsVisible, toggleSuccess } from "../../store/uiSlice";
-import { useRouter } from "next/router";
-import Button1 from "../UI/Button1";
-
-import Animation from "./animation";
+import { eraseCheckout } from "../../store/checkoutSlice";
 
 export default function Success() {
   const [isBrowser, setIsBrowser] = useState(false);
@@ -44,6 +46,7 @@ export default function Success() {
   const closeSuccessHandler = () => {
     dispatch(toggleSuccess());
     dispatch(removeAllFromCart());
+    dispatch(eraseCheckout());
     router.push("/");
   };
 

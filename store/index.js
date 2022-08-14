@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cartReducer from "./cartSlice";
 import uiReducer from "./uiSlice";
+import checkoutReducer from "./checkoutSlice";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import { combineReducers } from "redux";
@@ -14,6 +15,7 @@ const persistConfig = {
 const reducer = combineReducers({
   cart: cartReducer,
   ui: uiReducer,
+  checkout: checkoutReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);
@@ -23,10 +25,3 @@ const store = configureStore({
 });
 
 export default store;
-
-// export const store = configureStore({
-//   reducer: {
-//     cart: cartReducer,
-//     ui: uiReducer,
-//   },
-// });
