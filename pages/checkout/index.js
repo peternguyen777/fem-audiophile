@@ -119,7 +119,7 @@ function Checkout() {
       await axios.post("api/create-delivery-session", {
         items,
         data,
-        totalPrice,
+        grandTotalPrice,
         shippingPrice,
       });
     }

@@ -9,7 +9,7 @@ const app = !admin.apps.length
   : admin.app();
 
 export default async (req, res) => {
-  const { items, data, totalPrice, shippingPrice } = req.body;
+  const { items, data, grandTotalPrice, shippingPrice } = req.body;
 
   return app
     .firestore()
@@ -18,7 +18,7 @@ export default async (req, res) => {
     .collection("orders")
 
     .add({
-      amount: totalPrice,
+      amount_total: grandTotalPrice,
       amount_shipping: shippingPrice,
       customerData: data,
       items: items,

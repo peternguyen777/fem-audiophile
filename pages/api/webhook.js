@@ -25,7 +25,7 @@ const fulfillOrder = async (session) => {
     .collection("orders")
     .doc(session.id)
     .set({
-      amount: session.amount_total / 100,
+      amount_total: session.amount_total / 100,
       amount_shipping: session.total_details.amount_shipping / 100,
       customerData: JSON.parse(session.metadata.data),
       items: JSON.parse(session.metadata.items),
