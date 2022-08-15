@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 import Button1Submit from "../UI/Button1Submit";
 import Button1 from "../UI/Button1";
 import { useRouter } from "next/router";
@@ -45,21 +46,33 @@ function DetailProduct({ projectData }) {
       </p>
       {/* Main */}
       <div className='mt-6 md:flex md:items-center lg:mt-14'>
-        <img
-          src={projectData.image.mobile.substring(1)}
-          alt=''
-          className='mx-auto w-full rounded-lg object-contain md:hidden'
-        />
-        <img
-          src={projectData.image.tablet.substring(1)}
-          alt=''
-          className='mx-auto mr-[70px] hidden h-[480px] rounded-lg object-contain md:block lg:hidden'
-        />
-        <img
-          src={projectData.image.desktop.substring(1)}
-          alt=''
-          className='mx-auto mr-[125px] hidden h-[560px] rounded-lg object-contain lg:block'
-        />
+        <div className='relative mx-auto h-[327px] rounded-lg bg-gray md:hidden'>
+          <Image
+            layout='fill'
+            objectFit='contain'
+            src={projectData.image.mobile.substring(1)}
+            alt=''
+            className='rounded-lg object-contain md:hidden'
+          />
+        </div>
+        <div className='relative mx-auto hidden h-[480px] w-full bg-gray md:mr-[70px]  md:block lg:hidden'>
+          <Image
+            layout='fill'
+            objectFit='contain'
+            src={projectData.image.tablet.substring(1)}
+            alt=''
+            className='rounded-lg'
+          />
+        </div>
+        <div className='relative mx-auto hidden h-[560px] w-full bg-gray lg:mr-[125px] lg:block'>
+          <Image
+            layout='fill'
+            objectFit='contain'
+            src={projectData.image.desktop.substring(1)}
+            alt=''
+            className='rounded-lg'
+          />
+        </div>
         <div>
           {projectData.new && (
             <p className='form-title mt-8 mb-6 md:mt-0 md:mb-4'>NEW PRODUCT</p>
@@ -115,64 +128,101 @@ function DetailProduct({ projectData }) {
       </div>
 
       {/* gallery mobile*/}
-      <div className='mt-[88px] grid grid-rows-4 gap-y-5 md:hidden'>
-        <img
-          src={projectData.gallery.first.mobile.substring(1)}
-          alt=''
-          className='h-full w-full rounded-lg object-cover'
-        />
-        <img
-          src={projectData.gallery.second.mobile.substring(1)}
-          alt=''
-          className='h-full w-full rounded-lg object-cover'
-        />
-        <img
-          src={projectData.gallery.third.mobile.substring(1)}
-          alt=''
-          className='row-span-2 h-full w-full rounded-lg object-cover'
-        />
+      <div className='mt-[88px] grid h-[756px] grid-rows-4 gap-y-5 md:hidden'>
+        <div className='relative'>
+          <Image
+            layout='fill'
+            objectFit='cover'
+            src={projectData.gallery.first.mobile.substring(1)}
+            alt=''
+            className='rounded-lg'
+          />
+        </div>
+        <div className='relative'>
+          <Image
+            layout='fill'
+            objectFit='cover'
+            src={projectData.gallery.second.mobile.substring(1)}
+            alt=''
+            className='rounded-lg'
+          />
+        </div>
+        <div className='relative row-span-2 '>
+          <Image
+            layout='fill'
+            objectFit='cover'
+            src={projectData.gallery.third.mobile.substring(1)}
+            alt=''
+            className='rounded-lg'
+          />
+        </div>
       </div>
 
       {/* Gallery Tablet */}
-      <div className='mt-[120px] hidden grid-cols-5 gap-5 md:grid lg:hidden'>
+      <div className='mt-[120px] hidden grid-cols-5 gap-5 md:grid md:h-[368px] lg:hidden'>
         <div className='col-span-2 grid grid-rows-2 gap-5'>
-          <img
-            src={projectData.gallery.first.tablet.substring(1)}
+          <div className='relative'>
+            <Image
+              src={projectData.gallery.first.tablet.substring(1)}
+              alt=''
+              layout='fill'
+              objectFit='cover'
+              className='rounded-lg'
+            />
+          </div>
+          <div className='relative'>
+            <Image
+              src={projectData.gallery.second.tablet.substring(1)}
+              alt=''
+              layout='fill'
+              objectFit='cover'
+              className='rounded-lg'
+            />
+          </div>
+        </div>
+        <div className='relative col-span-3'>
+          <Image
+            src={projectData.gallery.third.tablet.substring(1)}
             alt=''
-            className='h-full w-full rounded-lg object-cover'
-          />
-          <img
-            src={projectData.gallery.second.tablet.substring(1)}
-            alt=''
-            className='h-full w-full rounded-lg object-cover'
+            layout='fill'
+            objectFit='cover'
+            className='rounded-lg'
           />
         </div>
-        <img
-          src={projectData.gallery.third.tablet.substring(1)}
-          alt=''
-          className='col-span-3 h-full w-full rounded-lg object-cover'
-        />
       </div>
 
       {/* Gallery Desktop */}
-      <div className='mt-[160px] hidden grid-cols-5 gap-8 lg:grid'>
+      <div className='mt-[160px] hidden grid-cols-5 gap-8 lg:grid lg:h-[592px]'>
         <div className='col-span-2 grid grid-rows-2 gap-8'>
-          <img
-            src={projectData.gallery.first.desktop.substring(1)}
+          <div className='relative'>
+            <Image
+              src={projectData.gallery.first.desktop.substring(1)}
+              alt=''
+              layout='fill'
+              objectFit='cover'
+              className='rounded-lg'
+            />
+          </div>
+          <div className='relative'>
+            <Image
+              src={projectData.gallery.second.desktop.substring(1)}
+              alt=''
+              layout='fill'
+              objectFit='cover'
+              className='rounded-lg'
+            />
+          </div>
+        </div>
+
+        <div className='relative col-span-3'>
+          <Image
+            src={projectData.gallery.third.desktop.substring(1)}
             alt=''
-            className='h-full w-full rounded-lg object-cover'
-          />
-          <img
-            src={projectData.gallery.second.desktop.substring(1)}
-            alt=''
-            className='h-full w-full rounded-lg object-cover'
+            layout='fill'
+            objectFit='cover'
+            className='rounded-lg'
           />
         </div>
-        <img
-          src={projectData.gallery.third.desktop.substring(1)}
-          alt=''
-          className='col-span-3 h-full w-full rounded-lg object-cover'
-        />
       </div>
 
       {/* others */}
@@ -181,8 +231,8 @@ function DetailProduct({ projectData }) {
         <h3 className='hidden md:inline-block'>YOU MAY ALSO LIKE</h3>
         <ul className='mt-10 space-y-14 md:mt-14 md:flex md:space-y-0 md:space-x-[10px] lg:mt-16 lg:space-x-[30px]'>
           {projectData.others.map((item, i) => (
-            <li key={i}>
-              <img
+            <li key={i} className='md:w-full'>
+              {/* <img
                 src={item.image.mobile.substring(1)}
                 alt=''
                 className='mx-auto rounded-lg object-contain md:hidden'
@@ -196,7 +246,34 @@ function DetailProduct({ projectData }) {
                 src={item.image.desktop.substring(1)}
                 alt=''
                 className='mx-auto hidden rounded-lg object-contain lg:block'
-              />
+              /> */}
+              <div className='relative mx-auto h-[120px] rounded-lg bg-gray md:hidden'>
+                <Image
+                  src={item.image.mobile.substring(1)}
+                  alt=''
+                  layout='fill'
+                  objectFit='contain'
+                  className='rounded-lg'
+                />
+              </div>
+              <div className='relative mx-auto hidden h-[318px] rounded-lg bg-gray md:block lg:hidden'>
+                <Image
+                  src={item.image.tablet.substring(1)}
+                  alt=''
+                  layout='fill'
+                  objectFit='contain'
+                  className='rounded-lg'
+                />
+              </div>
+              <div className='relative mx-auto hidden h-[318px] rounded-lg bg-gray lg:block'>
+                <Image
+                  src={item.image.desktop.substring(1)}
+                  alt=''
+                  layout='fill'
+                  objectFit='contain'
+                  className='rounded-lg'
+                />
+              </div>
               <div className='mt-8 flex flex-col items-center md:mt-10'>
                 <h5 className='mb-8'>{item.name}</h5>
 
