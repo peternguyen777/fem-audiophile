@@ -2,10 +2,14 @@ import React, { useEffect } from "react";
 import Head from "next/head";
 import Footer from "../../components/Footer";
 import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
 import Button1Submit from "../../components/UI/Button1Submit";
 import Success from "../../components/Checkout/success";
 import axios from "axios";
+
+//react hook form + yup
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import checkoutValidation from "../../validation/checkoutValidation";
 
 //redux
 import {
@@ -32,7 +36,7 @@ function Checkout() {
 
     setValue,
     formState: { errors },
-  } = useForm({ mode: "all" });
+  } = useForm({ resolver: yupResolver(checkoutValidation), mode: "all" });
 
   const paymentMethod = watch("payment");
 
@@ -155,7 +159,9 @@ function Checkout() {
                   }`}
                 >
                   <p className='form-label'>Name</p>
-                  {errors.name && <p className='form-label'>Required</p>}
+                  {errors.name && (
+                    <p className='form-label'>{errors.name.message}</p>
+                  )}
                 </label>
                 <input
                   {...register("name", { required: true })}
@@ -173,7 +179,9 @@ function Checkout() {
                   }`}
                 >
                   <p className='form-label'>Email Address</p>
-                  {errors.email && <p className='form-label'>Required</p>}
+                  {errors.email && (
+                    <p className='form-label'>{errors.email.message}</p>
+                  )}
                 </label>
                 <input
                   {...register("email", { required: true })}
@@ -192,14 +200,16 @@ function Checkout() {
                 }`}
               >
                 <p className='form-label'>Phone Number</p>
-                {errors.phone && <p className='form-label'>Required</p>}
+                {errors.phone && (
+                  <p className='form-label'>{errors.phone.message}</p>
+                )}
               </label>
               <input
                 {...register("phone", { required: true })}
                 className={`${
                   errors.phone && `ring-2 ring-[#CD2C2C] focus:ring-[#CD2C2C]`
                 }`}
-                placeholder='+61 403 269 626'
+                placeholder='0403269626'
               />
             </div>
 
@@ -213,7 +223,9 @@ function Checkout() {
                 }`}
               >
                 <p className='form-label'>Your Address</p>
-                {errors.address && <p className='form-label'>Required</p>}
+                {errors.address && (
+                  <p className='form-label'>{errors.address.message}</p>
+                )}
               </label>
               <input
                 {...register("address", { required: true })}
@@ -232,7 +244,9 @@ function Checkout() {
                   }`}
                 >
                   <p className='form-label'>Suburb</p>
-                  {errors.suburb && <p className='form-label'>Required</p>}
+                  {errors.suburb && (
+                    <p className='form-label'>{errors.suburb.message}</p>
+                  )}
                 </label>
                 <input
                   {...register("suburb", { required: true })}
@@ -251,7 +265,9 @@ function Checkout() {
                   }`}
                 >
                   <p className='form-label'>State</p>
-                  {errors.state && <p className='form-label'>Required</p>}
+                  {errors.state && (
+                    <p className='form-label'>{errors.state.message}</p>
+                  )}
                 </label>
                 <input
                   {...register("state", { required: true })}
@@ -270,7 +286,9 @@ function Checkout() {
                 }`}
               >
                 <p className='form-label'>Post Code</p>
-                {errors.pcode && <p className='form-label'>Required</p>}
+                {errors.pcode && (
+                  <p className='form-label'>{errors.pcode.message}</p>
+                )}
               </label>
               <input
                 {...register("pcode", { required: true })}
