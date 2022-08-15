@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import ReactDOM from "react-dom";
 import { useRouter } from "next/router";
@@ -91,11 +92,16 @@ export default function Success() {
             <div className='my-6 md:mt-8 md:mb-12 md:flex md:w-full'>
               <div className='flex flex-col rounded-t-lg bg-gray p-6 md:w-full md:rounded-l-lg md:rounded-r-none'>
                 <div className='flex w-full items-center'>
-                  <img
-                    src={items[0]?.image}
-                    alt=''
-                    className='mr-4 h-[50px] w-[50px] rounded-lg'
-                  />
+                  <div className='relative mr-4 h-[50px] w-[50px] flex-none rounded-lg'>
+                    <Image
+                      src={items[0]?.image}
+                      alt=''
+                      layout='fill'
+                      objectFit='contain'
+                      className='rounded-lg'
+                    />
+                  </div>
+
                   <div className='w-full'>
                     <div className='flex items-center justify-between'>
                       <p className='font-bold'>{items[0]?.nameShort}</p>
@@ -116,11 +122,15 @@ export default function Success() {
                           key={item.id}
                           className='mt-4 flex w-full items-center'
                         >
-                          <img
-                            src={item.image}
-                            alt=''
-                            className='mr-4 h-[50px] w-[50px] rounded-lg'
-                          />
+                          <div className='relative mr-4 h-[50px] w-[50px] flex-none rounded-lg'>
+                            <Image
+                              src={item.image}
+                              alt=''
+                              layout='fill'
+                              objectFit='contain'
+                              className='rounded-lg'
+                            />
+                          </div>
                           <div className='w-full'>
                             <div className='flex items-center justify-between'>
                               <p className='font-bold'>{item.nameShort}</p>

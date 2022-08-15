@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Head from "next/head";
+import Image from "next/image";
 import Footer from "../../components/Footer";
 import { useRouter } from "next/router";
 import Button1Submit from "../../components/UI/Button1Submit";
@@ -74,7 +75,7 @@ function Checkout() {
       setValue("pcode", formData.pcode);
       setValue("payment", formData.payment);
     }
-  }, [router.query.success, router.query.cancel]);
+  }, [router.query.success, router.query.cancel, setValue, formData]);
 
   useEffect(() => {
     setValue("name", formData.name);
@@ -85,7 +86,7 @@ function Checkout() {
     setValue("state", formData.state);
     setValue("pcode", formData.pcode);
     setValue("payment", formData.payment);
-  }, []);
+  }, [setValue, formData]);
 
   const onSubmit = (data) => {
     dispatch(submitCheckout(data));
@@ -395,11 +396,15 @@ function Checkout() {
                     className='flex items-center justify-between'
                   >
                     <div className='flex w-full items-center'>
-                      <img
-                        src={item.image}
-                        alt=''
-                        className='mr-4 h-16 w-16 rounded-lg'
-                      />
+                      <div className='relative mr-4 h-16 w-16 flex-none rounded-lg'>
+                        <Image
+                          src={item.image}
+                          alt=''
+                          layout='fill'
+                          objectFit='contain'
+                          className='rounded-lg'
+                        />
+                      </div>
                       <div className='w-full'>
                         <div className='flex justify-between'>
                           <p className='font-bold'>{item.nameShort}</p>

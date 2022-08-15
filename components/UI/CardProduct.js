@@ -1,11 +1,12 @@
 import React from "react";
+import Image from "next/image";
 import Button1 from "./Button1";
 
 function CardProduct({ item }) {
   return (
     <div className='lg:flex lg:items-center lg:even:flex-row-reverse'>
       <div className='rounded-lg bg-gray'>
-        <img
+        {/* <img
           src={item.image.mobile.substring(1)}
           alt=''
           className='mx-auto h-[327px] rounded-lg object-contain md:hidden'
@@ -19,7 +20,35 @@ function CardProduct({ item }) {
           src={item.image.desktop.substring(1)}
           alt=''
           className='mx-auto hidden rounded-lg object-contain lg:block lg:w-[540px]'
-        />
+        /> */}
+
+        <div className='relative mx-auto h-[327px] rounded-lg md:hidden'>
+          <Image
+            src={item.image.mobile.substring(1)}
+            alt=''
+            className='rounded-lg'
+            layout='fill'
+            objectFit='contain'
+          />
+        </div>
+        <div className='relative mx-auto hidden rounded-lg md:block md:h-[352px] lg:hidden'>
+          <Image
+            src={item.image.mobile.substring(1)}
+            alt=''
+            className='rounded-lg'
+            layout='fill'
+            objectFit='contain'
+          />
+        </div>
+        <div className='relative mx-auto hidden rounded-lg lg:block lg:h-[560px] lg:w-[540px]'>
+          <Image
+            src={item.image.desktop.substring(1)}
+            alt=''
+            className='rounded-lg'
+            layout='fill'
+            objectFit='contain'
+          />
+        </div>
       </div>
       <div className='hidden w-[125px] lg:inline-block'></div>
       <div className='mt-8 flex flex-col items-center text-center md:mt-[52px] md:px-[58px] lg:mt-0 lg:w-[445px] lg:items-start lg:px-0 lg:text-left'>

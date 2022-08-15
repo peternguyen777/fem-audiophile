@@ -55,7 +55,7 @@ function DetailProduct({ projectData }) {
             className='rounded-lg object-contain md:hidden'
           />
         </div>
-        <div className='relative mx-auto hidden h-[480px] w-full bg-gray md:mr-[70px]  md:block lg:hidden'>
+        <div className='relative mx-auto hidden h-[480px] w-full rounded-lg bg-gray md:mr-[70px]  md:block lg:hidden'>
           <Image
             layout='fill'
             objectFit='contain'
@@ -64,7 +64,7 @@ function DetailProduct({ projectData }) {
             className='rounded-lg'
           />
         </div>
-        <div className='relative mx-auto hidden h-[560px] w-full bg-gray lg:mr-[125px] lg:block'>
+        <div className='relative mx-auto hidden h-[560px] w-full rounded-lg bg-gray lg:mr-[125px] lg:block'>
           <Image
             layout='fill'
             objectFit='contain'

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import ReactDOM from "react-dom";
 import CounterCart from "./UI/CounterCart";
@@ -71,11 +72,20 @@ export default function Cart() {
                     className='mt-6 flex items-center justify-between first:mt-0'
                   >
                     <div className='flex items-center'>
-                      <img
+                      {/* <img
                         src={item.image}
                         alt=''
                         className='mr-4 h-16 w-16 rounded-lg'
-                      />
+                      /> */}
+                      <div className='relative mr-4 h-16 w-16 flex-none rounded-lg'>
+                        <Image
+                          src={item.image}
+                          alt=''
+                          layout='fill'
+                          objectFit='contain'
+                          className='rounded-lg'
+                        />
+                      </div>
                       <div>
                         <p className='font-bold'>{item.nameShort}</p>
                         <p className='text-[14px] font-bold opacity-50'>

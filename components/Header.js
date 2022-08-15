@@ -35,7 +35,7 @@ function Header() {
 
   return (
     <>
-      <header className='sticky top-0 z-50 h-[90px] w-full bg-charcoal'>
+      <header className='sticky top-0 z-50 h-[90px] w-full bg-charcoal md:h-[96px]'>
         <div className='absolute top-1/2 mx-auto flex w-full -translate-y-1/2 items-center justify-between pl-[10px] pr-6 md:pr-10 md:pl-[26px] lg:left-0 lg:right-0 lg:max-w-[1190px] lg:pl-10'>
           <div className='lg:hidden'>
             <Hamburger
@@ -89,7 +89,7 @@ function Header() {
             )}
           </div>
         </div>
-        <hr className='absolute left-0 right-0 mx-auto mt-[90px] w-full text-white opacity-20 md:w-[calc(100%-80px)] md:px-10 lg:max-w-[1110px]' />
+        <hr className='absolute left-0 right-0 mx-auto mt-[90px] w-full text-white opacity-20 md:mt-[96px] md:w-[calc(100%-80px)] md:px-10 lg:max-w-[1110px]' />
       </header>
     </>
   );
