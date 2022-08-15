@@ -8,14 +8,19 @@ import Button1 from "../UI/Button1";
 function Banner() {
   return (
     <div className='relative flex h-full w-full justify-center bg-[#191919]'>
-      <div className='relative mx-auto h-[510px] w-full bg-black md:hidden'>
+      <div className='relative mx-auto h-[510px] w-full md:hidden'>
         <Image src={mobImgHeader} alt='' layout='fill' objectFit='cover' />
       </div>
       <div className='relative mx-auto hidden h-[632px] w-full md:block lg:hidden'>
-        <Image src={tabImgHeader} alt='' layout='fill' objectFit='cover' />
+        <Image src={tabImgHeader} alt='' layout='fill' objectFit='contain' />
       </div>
       <div className='relative mx-auto hidden h-[632px] w-full lg:block'>
-        <Image src={desktopImgHeader} alt='' layout='fill' objectFit='cover' />
+        <Image
+          src={desktopImgHeader}
+          alt=''
+          layout='fill'
+          objectFit='contain'
+        />
       </div>
 
       <div className='absolute bottom-[112px] w-full max-w-[1190px] px-6 md:bottom-[167px] md:px-[195px] lg:bottom-0 lg:top-[135px] lg:px-10 '>
