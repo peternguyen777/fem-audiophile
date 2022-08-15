@@ -75,7 +75,14 @@ function Checkout() {
       setValue("pcode", formData.pcode);
       setValue("payment", formData.payment);
     }
-  }, [router.query.success, router.query.cancel, setValue, formData]);
+  }, [
+    router.query.success,
+    router.query.cancel,
+    setValue,
+    formData,
+    dispatch,
+    items,
+  ]);
 
   useEffect(() => {
     setValue("name", formData.name);
