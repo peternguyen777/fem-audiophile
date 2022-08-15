@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Spin as Hamburger } from "hamburger-react";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";

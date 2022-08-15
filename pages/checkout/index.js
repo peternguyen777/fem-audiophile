@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import Button1Submit from "../../components/UI/Button1Submit";
 import Success from "../../components/Checkout/success";
+import axios from "axios";
 
 //redux
 import {
@@ -14,17 +15,11 @@ import {
   setGrandPrice,
 } from "../../store/cartSlice";
 import { selectSuccessIsVisible, toggleSuccess } from "../../store/uiSlice";
-import {
-  submitCheckout,
-  eraseCheckout,
-  selectData,
-} from "../../store/checkoutSlice";
+import { submitCheckout, selectData } from "../../store/checkoutSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 //stripe
 import { loadStripe } from "@stripe/stripe-js";
-import axios from "axios";
-
 const stripePromise = loadStripe(`${process.env.stripe_public_key}`);
 
 function Checkout() {
@@ -34,9 +29,9 @@ function Checkout() {
     register,
     handleSubmit,
     watch,
-    reset,
+
     setValue,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm({ mode: "all" });
 
   const paymentMethod = watch("payment");
@@ -88,37 +83,41 @@ function Checkout() {
     setValue("payment", formData.payment);
   }, []);
 
-  useEffect(() => {
-    if (isSubmitSuccessful && paymentMethod !== "Stripe") {
-      router.push("/checkout?success=true", undefined, { shallow: true });
-      console.log("successful");
-    }
-  }, [isSubmitSuccessful, reset]);
-
   const onSubmit = (data) => {
     dispatch(submitCheckout(data));
 
-    if (paymentMethod === "Stripe") {
-      createCheckoutSession(data);
+    createCheckoutSession(data);
+
+    if (paymentMethod === "Cash on Delivery") {
+      router.push("/checkout?success=true", undefined, { shallow: true });
     }
   };
 
-  console.log("init form data:", formData);
-
   const createCheckoutSession = async (data) => {
-    const stripe = await stripePromise;
+    if (paymentMethod === "Stripe") {
+      const stripe = await stripePromise;
 
-    const checkoutSession = await axios.post("api/create-checkout-session", {
-      items,
-      data,
-    });
+      const checkoutSession = await axios.post("api/create-checkout-session", {
+        items,
+        data,
+      });
 
-    const result = await stripe.redirectToCheckout({
-      sessionId: checkoutSession.data.id,
-    });
+      const result = await stripe.redirectToCheckout({
+        sessionId: checkoutSession.data.id,
+      });
 
-    if (result.error) {
-      alert(result.error.message);
+      if (result.error) {
+        alert(result.error.message);
+      }
+    }
+
+    if (paymentMethod === "Cash on Delivery") {
+      await axios.post("api/create-delivery-session", {
+        items,
+        data,
+        totalPrice,
+        shippingPrice,
+      });
     }
   };
 
@@ -303,8 +302,6 @@ function Checkout() {
                     paymentMethod === "Stripe" && `ring-orange`
                   }`}
                   onClick={() => {
-                    // setValue("eMoneyNum", "");
-                    // setValue("eMoneyPin", "");
                     setValue("payment", "Stripe");
                   }}
                 >
@@ -320,31 +317,12 @@ function Checkout() {
                     <p className='form-label'>Credit/Debit Card (via Stripe)</p>
                   </label>
                 </div>
-                {/* <div
-                  className={`mt-4 flex h-14 w-full cursor-pointer items-center rounded-lg ring-1 ring-[#CFCFCF] hover:ring-orange ${
-                    paymentMethod === "e-Money" && `ring-orange`
-                  }`}
-                  onClick={() => setValue("payment", "e-Money")}
-                >
-                  <input
-                    {...register("payment", { required: true })}
-                    type='radio'
-                    value='e-Money'
-                    className={`my-0 mx-[25px] h-[10px] w-[10px] cursor-pointer appearance-none  rounded-full p-0 ring-1 ring-[#CFCFCF] ring-offset-[5px] ${
-                      paymentMethod === "e-Money" && `bg-orange `
-                    }`}
-                  />
-                  <label htmlFor='payment' className='mt-0'>
-                    <p className='form-label'>e-Money</p>
-                  </label>
-                </div> */}
+
                 <div
                   className={`mt-4 flex h-14 w-full cursor-pointer items-center rounded-lg ring-1 ring-[#CFCFCF] hover:ring-orange ${
                     paymentMethod === "Cash on Delivery" && `ring-orange`
                   }`}
                   onClick={() => {
-                    // setValue("eMoneyNum", "");
-                    // setValue("eMoneyPin", "");
                     setValue("payment", "Cash on Delivery");
                   }}
                 >
@@ -385,48 +363,6 @@ function Checkout() {
                 </p>
               </div>
             )}
-            {/* {paymentMethod === "e-Money" && (
-              <div className='md:mt-6 md:flex md:space-x-4'>
-                <div className='mt-11 md:mt-0 md:w-full'>
-                  <label
-                    htmlFor='eMoneyNum'
-                    className={`flex justify-between ${
-                      errors.eMoneyNum && `text-[#CD2C2C]`
-                    }`}
-                  >
-                    <p className='form-label'>e-Money Number</p>
-                    {errors.eMoneyNum && <p className='form-label'>Required</p>}
-                  </label>
-                  <input
-                    {...register("eMoneyNum", { required: true })}
-                    className={`${
-                      errors.eMoneyNum &&
-                      `ring-2 ring-[#CD2C2C] focus:ring-[#CD2C2C]`
-                    }`}
-                    placeholder='238521993'
-                  />
-                </div>
-                <div className='mt-6 md:mt-0 md:w-full'>
-                  <label
-                    htmlFor='eMoneyPin'
-                    className={`flex justify-between ${
-                      errors.eMoneyPin && `text-[#CD2C2C]`
-                    }`}
-                  >
-                    <p className='form-label'>e-Money PIN</p>
-                    {errors.eMoneyPin && <p className='form-label'>Required</p>}
-                  </label>
-                  <input
-                    {...register("eMoneyPin", { required: true })}
-                    className={`${
-                      errors.eMoneyPin &&
-                      `ring-2 ring-[#CD2C2C] focus:ring-[#CD2C2C]`
-                    }`}
-                    placeholder='6891'
-                  />
-                </div>
-              </div>
-            )} */}
           </div>
 
           <div className='mx-auto mt-8 w-full flex-none rounded-lg bg-white py-8 px-6 md:p-8 lg:mt-0 lg:h-fit lg:w-[350px]'>
