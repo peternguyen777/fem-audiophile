@@ -1,5 +1,7 @@
 ![alt text](https://pnguyen-portfolio.vercel.app/detail/desktop/image-audiophile-hero@2x.jpg)
 
+Deployment:https://fem-audiophile.vercel.app/
+
 Audiophile is an e-commerce application selling high-fidelity audio equipment. The aim was to build out a complete e-commerce website with visually rich UI, a smooth cart updating experience, the ability to receive credit/debit card payments and order information in a database. NextJS was chosen as the React framework for its additional API back-end capability.
 
 For the front-end TailwindCSS is used for quick prototyping, easy to implement responsive styling and smooth animations. Redux Toolkit is used for managing the state of the cart, UI elements and form fields. These states are persisted into local storage using Redux Persist, retaining cart information even if the page is refreshed.
