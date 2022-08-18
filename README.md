@@ -12,7 +12,7 @@ Note:
 
 Stripe Checkout is running test mode only.
 Use the dummy credit details for demo:
--Card Number: 4242 4242 4242 4242
+-Card Number: 4242 4242 4242 4242\n
 -MM/YY: 04/24
 -CVC: 424
 
