@@ -8,5 +8,14 @@ For the front-end TailwindCSS is used for quick prototyping, easy to implement r
 
 For the checkout, the project uses React-Hook-Form with yup for form validation. The user is able to pay by card via Stripe integration or can opt for cash payment at delivery. The form information is then forwarded to a Firestore database for the client to keep track of orders. This is achieved in the backend via NextJS' API Routes, sent directly to Firestore if payment is Cash on Delivery or via webhook if paying through Stripe.
 
+Note:
+
+Stripe Checkout is running test mode only.
+Use the dummy credit details for demo:
+-Card Number: 4242 4242 4242 4242
+-MM/YY: 04/24
+-CVC: 424
+
+
 ![alt text](https://pnguyen-portfolio.vercel.app/detail/desktop/image-audiophile-preview-1@2x.jpg)
 ![alt text](https://pnguyen-portfolio.vercel.app/detail/desktop/image-audiophile-preview-2@2x.jpg)
