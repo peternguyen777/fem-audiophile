@@ -2,11 +2,14 @@
 
 ### Deployment:https://fem-audiophile.vercel.app/ ###
 
-### Note: Stripe Checkout is running test mode. ###
+**NextJS / TailwindCSS / Redux / Stripe / Firebase**
+
+**Note: Stripe Checkout is running test mode.**
 Use the following test card details for demo:
 * Card Number: 4242 4242 4242 4242
 * MM/YY: 04/24
 * CVC: 424
+
 ----
 
 **Audiophile** is an e-commerce application selling high-fidelity audio equipment. The aim was to build out a complete e-commerce website with visually rich UI, a smooth cart updating experience, the ability to receive credit/debit card payments and order information in a database. NextJS was chosen as the React framework for its additional API back-end capability.
